@@ -1,0 +1,79 @@
+name: Export Cursor macOS default keybindings
+
+on:
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  export:
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: scripts/get_default_keybindings/package-lock.json
+
+      - name: Download Cursor and export default keybindings
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ARCH="$(uname -m)"
+          case "$ARCH" in
+            arm64) PLATFORM="darwin-arm64" ;;
+            x86_64) PLATFORM="darwin-x64" ;;
+            *)
+              echo "Unsupported runner arch: $ARCH"
+              exit 1
+              ;;
+          esac
+
+          curl -fsSL "https://www.cursor.com/api/download?platform=${PLATFORM}&releaseTrack=stable" -o /tmp/cursor-meta.json
+          URL="$(python3 -c "import json; print(json.load(open('/tmp/cursor-meta.json'))['downloadUrl'])")"
+          VERSION="$(python3 -c "import json; print(json.load(open('/tmp/cursor-meta.json')).get('version', 'unknown'))")"
+          echo "Cursor version: ${VERSION}"
+
+          curl -fL "$URL" -o /tmp/Cursor.dmg
+
+          MOUNT_DIR="$(mktemp -d)"
+          hdiutil attach /tmp/Cursor.dmg -nobrowse -quiet -mountpoint "$MOUNT_DIR"
+
+          CURSOR_BIN="$MOUNT_DIR/Cursor.app/Contents/MacOS/Cursor"
+          if [ ! -x "$CURSOR_BIN" ]; then
+            CURSOR_BIN="$(find "$MOUNT_DIR" -path '*/Cursor.app/Contents/MacOS/Cursor' -print -quit)"
+          fi
+          if [ -z "${CURSOR_BIN}" ] || [ ! -x "$CURSOR_BIN" ]; then
+            echo "Cursor executable not found in mounted dmg"
+            exit 1
+          fi
+
+          xattr -cr "$MOUNT_DIR/Cursor.app" 2>/dev/null || true
+
+          pushd scripts/get_default_keybindings
+          npm ci
+          CURSOR_EXECUTABLE_PATH="$CURSOR_BIN" node ./main.js
+          popd
+
+          hdiutil detach "$MOUNT_DIR" -quiet
+
+      - name: Verify exported file
+        shell: bash
+        run: |
+          set -euo pipefail
+          ls -la scripts
+          test -f scripts/macos.keybindings.raw.json
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cursor-macos-default-keybindings-raw
+          path: scripts/macos.keybindings.raw.json
+          if-no-files-found: error

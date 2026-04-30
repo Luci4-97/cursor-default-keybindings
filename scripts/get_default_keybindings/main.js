@@ -1,21 +1,19 @@
 'use strict';
+const os = require('os');
 const path = require('path');
 const fsPromises = require('fs/promises');
 const { runTests } = require('@vscode/test-electron');
 
 async function main() {
     try {
-        // Make two empty directories to use to launch VS Code with the cleanest possible profile.
-        const emptyDir1 = path.resolve(__dirname, 'empty1');
-        const emptyDir2 = path.resolve(__dirname, 'empty2');
-        await fsPromises.mkdir(emptyDir1, { recursive: true });
-        await fsPromises.mkdir(emptyDir2, { recursive: true });
+        // Keep profile paths very short; long unix socket paths can break startup on macOS CI.
+        const emptyDir1 = await fsPromises.mkdtemp(path.join(os.tmpdir(), 'ckb-ext-'));
+        const emptyDir2 = await fsPromises.mkdtemp(path.join(os.tmpdir(), 'ckb-user-'));
 
         // Path to the script that retrieves and saves the default keybindings JSON to a file.
         const scriptPath = path.resolve(__dirname, 'main_impl.js');
 
-        // Download VS Code, unzip it, launch it without extensions, and run the script.
-        await runTests({
+        const testOptions = {
             extensionDevelopmentPath: __dirname,
             extensionTestsPath: scriptPath,
             launchArgs: [
@@ -24,7 +22,15 @@ async function main() {
                 '--user-data-dir',
                 emptyDir2
             ]
-        });
+        };
+
+        // Allow CI to run tests against a preinstalled Cursor executable.
+        if (process.env.CURSOR_EXECUTABLE_PATH) {
+            testOptions.vscodeExecutablePath = process.env.CURSOR_EXECUTABLE_PATH;
+        }
+
+        // If no executable path is provided, vscode-test downloads VS Code by default.
+        await runTests(testOptions);
     } catch (err) {
         console.error('Failed to run');
         process.exit(1);

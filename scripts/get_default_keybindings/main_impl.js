@@ -19,10 +19,10 @@ async function openDefaultKeybindingsFile() {
         });
         vscode.commands.executeCommand('workbench.action.openDefaultKeybindingsFile').then(() => {
             setTimeout(() => {
-                console.error('timeout');
+                console.error('Timed out waiting for default keybindings editor');
                 listener.dispose();
-                reject();
-            }, 10 * 1000);
+                reject(new Error('openDefaultKeybindingsFile timeout'));
+            }, 60 * 1000);
         });
     });
 }
