@@ -1,0 +1,89 @@
+name: Export Cursor Windows default keybindings
+
+on:
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  export:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: scripts/get_default_keybindings/package-lock.json
+
+      - name: Download and install Cursor (Windows)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          $meta = Invoke-RestMethod "https://www.cursor.com/api/download?platform=win32-x64-user&releaseTrack=stable"
+          $url = $meta.downloadUrl
+          Write-Host "Cursor version: $($meta.version)"
+
+          $installer = Join-Path $env:RUNNER_TEMP "CursorUserSetup.exe"
+          Invoke-WebRequest -Uri $url -OutFile $installer
+
+          Start-Process -FilePath $installer -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-" -Wait
+
+          $candidatePaths = @(
+            (Join-Path $env:LOCALAPPDATA "Programs\Cursor\Cursor.exe"),
+            (Join-Path $env:ProgramFiles "Cursor\Cursor.exe"),
+            (Join-Path ${env:ProgramFiles(x86)} "Cursor\Cursor.exe")
+          )
+
+          $cursorExe = $null
+          foreach ($path in $candidatePaths) {
+            if ($path -and (Test-Path -LiteralPath $path)) {
+              $cursorExe = $path
+              break
+            }
+          }
+
+          if (-not $cursorExe) {
+            $found = Get-ChildItem -Path (Join-Path $env:LOCALAPPDATA "Programs") -Filter Cursor.exe -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+            if ($found) {
+              $cursorExe = $found.FullName
+            }
+          }
+
+          if (-not $cursorExe) {
+            throw "Cursor executable not found after install"
+          }
+
+          "CURSOR_EXECUTABLE_PATH=$cursorExe" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          Write-Host "Cursor executable: $cursorExe"
+
+      - name: Export default keybindings
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          Push-Location scripts/get_default_keybindings
+          npm ci
+          node .\main.js
+          Pop-Location
+
+      - name: Verify exported file
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          Get-ChildItem scripts
+          if (-not (Test-Path -LiteralPath "scripts/windows.keybindings.raw.json")) {
+            throw "windows.keybindings.raw.json not found"
+          }
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cursor-windows-default-keybindings-raw
+          path: scripts/windows.keybindings.raw.json
+          if-no-files-found: error
