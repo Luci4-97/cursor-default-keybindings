@@ -125,7 +125,11 @@ function makeHeader(platform) {
         platform === 'darwin' ? 'macOS' :
         'Linux'
     );
-    const signature = `${vscode.env.appName} ${vscode.version} for ${target}`;
+    // `vscode.version` is the embedded VS Code engine version (e.g. 1.105.1),
+    // not the Cursor app version. The workflow passes the real Cursor version
+    // (e.g. 3.6.21) via CURSOR_VERSION; fall back to the engine version locally.
+    const version = process.env.CURSOR_VERSION || vscode.version;
+    const signature = `${vscode.env.appName} ${version} for ${target}`;
     const header = `// Default Keybindings of ${signature}\n`;
     return header;
 }

@@ -60,7 +60,7 @@ jobs:
 
           pushd scripts/get_default_keybindings
           npm ci
-          CURSOR_EXECUTABLE_PATH="$CURSOR_BIN" node ./main.js
+          CURSOR_EXECUTABLE_PATH="$CURSOR_BIN" CURSOR_VERSION="$VERSION" node ./main.js
           popd
 
           hdiutil detach "$MOUNT_DIR" -quiet

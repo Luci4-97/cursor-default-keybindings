@@ -28,7 +28,12 @@ async function main() {
         const testOptions = {
             extensionDevelopmentPath: __dirname,
             extensionTestsPath: scriptPath,
-            launchArgs
+            launchArgs,
+            // Forward the real Cursor app version to the extension host so the
+            // header records e.g. "Cursor 3.6.21" instead of the engine version.
+            extensionTestsEnv: {
+                CURSOR_VERSION: process.env.CURSOR_VERSION
+            }
         };
 
         // Allow CI to run tests against a preinstalled Cursor executable.

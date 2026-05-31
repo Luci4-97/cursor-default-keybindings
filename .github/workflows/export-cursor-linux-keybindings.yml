@@ -48,6 +48,7 @@ jobs:
           fi
 
           echo "CURSOR_EXECUTABLE_PATH=$CURSOR_BIN" >> "$GITHUB_ENV"
+          echo "CURSOR_VERSION=$VERSION" >> "$GITHUB_ENV"
           echo "Cursor executable: $CURSOR_BIN"
 
       - name: Export default keybindings
