@@ -5,6 +5,8 @@ name: Update Cursor default keybindings
 # pull request when anything changed.
 
 on:
+  schedule:
+    - cron: '0 6 */3 * *' # Every 3 days at 06:00 UTC
   workflow_dispatch:
 
 permissions:
