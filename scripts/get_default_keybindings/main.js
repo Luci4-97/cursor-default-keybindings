@@ -13,15 +13,22 @@ async function main() {
         // Path to the script that retrieves and saves the default keybindings JSON to a file.
         const scriptPath = path.resolve(__dirname, 'main_impl.js');
 
+        const launchArgs = [
+            '--extensions-dir',
+            emptyDir1,
+            '--user-data-dir',
+            emptyDir2
+        ];
+
+        // The Electron sandbox cannot start under headless CI (xvfb) / extracted AppImage on Linux.
+        if (os.platform() === 'linux') {
+            launchArgs.push('--no-sandbox');
+        }
+
         const testOptions = {
             extensionDevelopmentPath: __dirname,
             extensionTestsPath: scriptPath,
-            launchArgs: [
-                '--extensions-dir',
-                emptyDir1,
-                '--user-data-dir',
-                emptyDir2
-            ]
+            launchArgs
         };
 
         // Allow CI to run tests against a preinstalled Cursor executable.

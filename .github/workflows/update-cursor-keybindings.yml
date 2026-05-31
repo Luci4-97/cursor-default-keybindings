@@ -1,0 +1,111 @@
+name: Update Cursor default keybindings
+
+# Exports the default keybindings of the latest stable Cursor on every OS,
+# regenerates the polished JSON files via scripts/process_json.py, and opens a
+# pull request when anything changed.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  export-windows:
+    uses: ./.github/workflows/export-cursor-windows-keybindings.yml
+
+  export-macos:
+    uses: ./.github/workflows/export-cursor-macos-keybindings.yml
+
+  export-linux:
+    uses: ./.github/workflows/export-cursor-linux-keybindings.yml
+
+  update-and-pr:
+    needs: [export-windows, export-macos, export-linux]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download raw artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Stage raw files for processing
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp artifacts/cursor-windows-default-keybindings-raw/windows.keybindings.raw.json scripts/
+          cp artifacts/cursor-macos-default-keybindings-raw/macos.keybindings.raw.json scripts/
+          cp artifacts/cursor-linux-default-keybindings-raw/linux.keybindings.raw.json scripts/
+
+      - name: Regenerate keybindings files
+        shell: bash
+        run: python3 process_json.py
+        working-directory: scripts
+
+      - name: Check for changes
+        id: diff
+        shell: bash
+        run: |
+          if git diff --exit-code -- '*.keybindings.json'; then
+            echo "has-diff=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has-diff=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Extract Cursor version
+        id: ver
+        shell: bash
+        run: |
+          set -euo pipefail
+          version=$(head -n 1 scripts/linux.keybindings.raw.json | sed -E "s/.*(([0-9]+\.){2}[0-9]+).*/\1/")
+          echo "version: ${version}"
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+
+      - name: Check for an existing PR with the same title
+        id: pr
+        if: steps.diff.outputs.has-diff == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          title="Update for Cursor ${{ steps.ver.outputs.version }}"
+          prlist=$(gh pr list --state all --json number,author,title --limit 100)
+          match=$(echo "$prlist" | jq "map(select(.author.login==\"app/github-actions\") | select(.title==\"${title}\"))[0]")
+          if [ "${match}" = "null" ]; then
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Make a unique branch name
+        id: branch
+        shell: bash
+        run: echo "name=update-cursor-keybindings-$(date +'%Y-%m-%d-%H-%M')" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push branch
+        if: steps.diff.outputs.has-diff == 'true' && steps.pr.outputs.exists == 'false'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "${{ steps.branch.outputs.name }}"
+          git add ./*.keybindings.json
+          git commit -m "Update for Cursor ${{ steps.ver.outputs.version }}"
+          git push origin "${{ steps.branch.outputs.name }}"
+
+      - name: Open pull request
+        if: steps.diff.outputs.has-diff == 'true' && steps.pr.outputs.exists == 'false'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          title="Update for Cursor ${{ steps.ver.outputs.version }}"
+          body="Generated automatically by the [Update Cursor default keybindings](../actions/workflows/update-cursor-keybindings.yml) workflow."
+          gh pr create --base "${{ github.ref_name }}" --head "${{ steps.branch.outputs.name }}" --title "${title}" --body "${body}"
