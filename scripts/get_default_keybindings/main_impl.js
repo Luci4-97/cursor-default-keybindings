@@ -6,6 +6,15 @@ const vscode = require('vscode');
 
 const sleep = msec => new Promise(resolve => setTimeout(resolve, msec));
 
+// The virtual document that backs "Open Default Keyboard Shortcuts (JSON)".
+// Resolving it through the text-model content provider gives the exact same
+// content as the editor without opening an editor at all.
+const DEFAULT_KEYBINDINGS_URI = vscode.Uri.from({
+    scheme: 'vscode',
+    authority: 'defaultsettings',
+    path: '/keybindings.json'
+});
+
 function isKeybindingsDocument(document) {
     const uri = document.uri;
     return uri.scheme === 'vscode' && path.basename(uri.path) === 'keybindings.json';
@@ -20,23 +29,35 @@ function findVisibleKeybindingsDocument() {
     return undefined;
 }
 
-// Cursor (unlike stock VS Code) can throw `Cannot read properties of undefined
-// (reading 'activeEditor')` from `openDefaultKeybindingsFile` when the editor
-// area is not ready yet. So we warm the editor area up and retry the command,
-// catching rejections, until the default keybindings document shows up.
-async function openDefaultKeybindingsFile() {
+// Preferred path: open the default keybindings as a text document directly.
+// This avoids the editor/group machinery entirely, which is important on Cursor
+// where opening any editor in the headless test host throws
+// `Cannot read properties of undefined (reading 'activeEditor')`.
+async function readViaTextDocument() {
+    const document = await vscode.workspace.openTextDocument(DEFAULT_KEYBINDINGS_URI);
+    let text = document.getText();
+    for (let i = 0; i < 20 && text.trim().length === 0; i++) {
+        await sleep(500);
+        text = document.getText();
+    }
+    return text;
+}
+
+// Fallback path (stock VS Code): trigger the editor command and grab the
+// document once it becomes visible, retrying until the editor area is ready.
+async function readViaEditorCommand() {
     const overallTimeoutMs = 90 * 1000;
     const maxAttempts = 30;
 
-    return await new Promise((resolve, reject) => {
+    const document = await new Promise((resolve, reject) => {
         let settled = false;
 
-        const finishResolve = document => {
+        const finishResolve = doc => {
             if (settled) return;
             settled = true;
             listener.dispose();
             clearTimeout(timeout);
-            resolve(document);
+            resolve(doc);
         };
         const finishReject = err => {
             if (settled) return;
@@ -60,14 +81,6 @@ async function openDefaultKeybindingsFile() {
         }, overallTimeoutMs);
 
         (async () => {
-            // Force the editor area to initialize before opening the special editor.
-            try {
-                await vscode.commands.executeCommand('workbench.action.files.newUntitledFile');
-            } catch (err) {
-                console.error(`Warm-up newUntitledFile failed: ${err && err.message}`);
-            }
-            await sleep(1000);
-
             const already = findVisibleKeybindingsDocument();
             if (already) {
                 finishResolve(already);
@@ -81,14 +94,29 @@ async function openDefaultKeybindingsFile() {
                     console.error(`openDefaultKeybindingsFile attempt ${attempt} failed: ${err && err.message}`);
                 }
                 await sleep(1000);
-                const document = findVisibleKeybindingsDocument();
-                if (document) {
-                    finishResolve(document);
+                const doc = findVisibleKeybindingsDocument();
+                if (doc) {
+                    finishResolve(doc);
                     return;
                 }
             }
         })().catch(finishReject);
     });
+
+    return document.getText();
+}
+
+async function getDefaultKeybindingsText() {
+    try {
+        const text = await readViaTextDocument();
+        if (text && text.trim().length > 0) {
+            return text;
+        }
+        console.error('Default keybindings text document was empty; falling back to editor command.');
+    } catch (err) {
+        console.error(`openTextDocument approach failed: ${err && err.message}; falling back to editor command.`);
+    }
+    return await readViaEditorCommand();
 }
 
 function makeHeader(platform) {
@@ -113,9 +141,11 @@ function makeOutputFilePath(platform) {
 }
 
 async function run() {
-    await sleep(4000);
-    const document = await openDefaultKeybindingsFile();
-    const json = document.getText();
+    await sleep(2000);
+    const json = await getDefaultKeybindingsText();
+    if (!json || json.trim().length === 0) {
+        throw new Error('Default keybindings content was empty');
+    }
     const platform = os.platform();
     const header = makeHeader(platform);
     const outputPath = makeOutputFilePath(platform);
