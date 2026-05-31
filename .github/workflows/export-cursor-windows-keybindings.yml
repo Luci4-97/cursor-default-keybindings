@@ -2,6 +2,7 @@ name: Export Cursor Windows default keybindings
 
 on:
   workflow_dispatch:
+  workflow_call:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true

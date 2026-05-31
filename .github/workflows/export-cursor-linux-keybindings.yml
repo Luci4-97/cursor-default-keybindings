@@ -1,0 +1,74 @@
+name: Export Cursor Linux default keybindings
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: scripts/get_default_keybindings/package-lock.json
+
+      - name: Download and extract Cursor (Linux)
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          curl -fsSL "https://www.cursor.com/api/download?platform=linux-x64&releaseTrack=stable" -o /tmp/cursor-meta.json
+          URL="$(python3 -c "import json; print(json.load(open('/tmp/cursor-meta.json'))['downloadUrl'])")"
+          VERSION="$(python3 -c "import json; print(json.load(open('/tmp/cursor-meta.json')).get('version', 'unknown'))")"
+          echo "Cursor version: ${VERSION}"
+
+          curl -fL "$URL" -o /tmp/Cursor.AppImage
+          chmod +x /tmp/Cursor.AppImage
+
+          # GitHub runners have no FUSE, so extract the AppImage instead of mounting it.
+          ( cd /tmp && /tmp/Cursor.AppImage --appimage-extract >/dev/null )
+
+          CURSOR_BIN="/tmp/squashfs-root/AppRun"
+          if [ ! -x "$CURSOR_BIN" ]; then
+            CURSOR_BIN="$(find /tmp/squashfs-root -maxdepth 2 -type f -name cursor -print -quit || true)"
+          fi
+          if [ -z "${CURSOR_BIN}" ] || [ ! -x "$CURSOR_BIN" ]; then
+            echo "Cursor executable not found in extracted AppImage"
+            exit 1
+          fi
+
+          echo "CURSOR_EXECUTABLE_PATH=$CURSOR_BIN" >> "$GITHUB_ENV"
+          echo "Cursor executable: $CURSOR_BIN"
+
+      - name: Export default keybindings
+        shell: bash
+        run: |
+          set -euo pipefail
+          pushd scripts/get_default_keybindings
+          npm ci
+          xvfb-run -a node ./main.js
+          popd
+
+      - name: Verify exported file
+        shell: bash
+        run: |
+          set -euo pipefail
+          ls -la scripts
+          test -f scripts/linux.keybindings.raw.json
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cursor-linux-default-keybindings-raw
+          path: scripts/linux.keybindings.raw.json
+          if-no-files-found: error
