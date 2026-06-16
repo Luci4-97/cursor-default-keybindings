@@ -1,4 +1,4 @@
-// Default Keybindings of Cursor 3.7.21 for macOS
+// Default Keybindings of Cursor 3.7.36 for macOS
     
 [
     { "key": "escape escape",         "command": "-workbench.action.exitZenMode",
@@ -854,7 +854,7 @@
     { "key": "alt+cmd+pageup",        "command": "-editor.action.accessibleViewPreviousCodeBlock",
                                          "when": "accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'inlineChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'panelChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'quickChat'" },
     { "key": "cmd+r cmd+k",           "command": "-editor.action.defineKeybinding",
-                                         "when": "resource == 'vscode-userdata:/var/folders/8d/778wjbv96mq1760tv6gk374m0000gn/T/ckb-user-FOuqp3/User/keybindings.json'" },
+                                         "when": "resource == 'vscode-userdata:/var/folders/bh/cdl3cft92_dbvg852_fp7y7w0000gn/T/ckb-user-DBfBHW/User/keybindings.json'" },
     { "key": "tab",                   "command": "-editor.action.inlineSuggest.commit",
                                          "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
     { "key": "alt+cmd+o",             "command": "-editor.action.toggleOvertypeInsertMode" },
@@ -2169,9 +2169,9 @@
     { "key": "escape",                "command": "-glass.skipPendingShellTool",
                                          "when": "composerShellToolPendingKeybindingsActive && glassNoModalOpen && isGlassAgentWorkspace && !glassDesignModeInputFocused && !terminalFocusInAny" },
     { "key": "cmd+d",                 "command": "-glass.splitTileHorizontalFromKeyboard",
-                                         "when": "glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !glassEditorPanelVisible && !terminalFocusInAny || glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !terminalFocusInAny && glassActiveTabKind != 'browser'" },
+                                         "when": "glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !glassEditorPanelVisible && !terminalFocusInAny || glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !terminalFocusInAny && glassActiveTabKind != 'browser' && glassActiveTabKind != 'canvas'" },
     { "key": "shift+cmd+d",           "command": "-glass.splitTileVerticalFromKeyboard",
-                                         "when": "glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !glassEditorPanelVisible && !terminalFocusInAny || glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !terminalFocusInAny && glassActiveTabKind != 'browser'" },
+                                         "when": "glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !glassEditorPanelVisible && !terminalFocusInAny || glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !terminalFocusInAny && glassActiveTabKind != 'browser' && glassActiveTabKind != 'canvas'" },
     { "key": "ctrl+enter",            "command": "-glass.stageSelectedChanges",
                                          "when": "isGlassAgentWorkspace && !isGlassSidebarShowMoreFocused && glassActiveDiffScope == 'unstaged' && glassActiveTabKind == 'diff'" },
     { "key": "shift+alt+enter",       "command": "-glass.stageSelectedChanges",
@@ -2185,7 +2185,7 @@
     { "key": "shift+alt+d",           "command": "-glass.toggleCursorDevTools",
                                          "when": "glassNoModalOpen && isGlassEmptyWorkspace" },
     { "key": "shift+cmd+d",           "command": "-glass.toggleDesignMode",
-                                         "when": "glassEditorPanelVisible && isGlassAgentWorkspace && glassActiveTabKind == 'browser'" },
+                                         "when": "glassEditorPanelVisible && isGlassAgentWorkspace && glassActiveTabKind == 'browser' || glassEditorPanelVisible && isGlassAgentWorkspace && glassActiveTabKind == 'canvas'" },
     { "key": "alt+cmd+i",             "command": "-glass.toggleDevTools",
                                          "when": "glassNoModalOpen && isGlassEmptyWorkspace" },
     { "key": "ctrl+s",                "command": "-glass.toggleFileTreeSidebar",
