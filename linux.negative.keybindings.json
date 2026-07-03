@@ -1,4 +1,4 @@
-// Default Keybindings of Cursor 3.7.21 for Linux
+// Default Keybindings of Cursor 3.7.36 for Linux
   
 [
   { "key": "escape escape",         "command": "-workbench.action.exitZenMode",
@@ -781,7 +781,7 @@
   { "key": "ctrl+alt+pageup",       "command": "-editor.action.accessibleViewPreviousCodeBlock",
                                        "when": "accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'inlineChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'panelChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'quickChat'" },
   { "key": "ctrl+m ctrl+k",         "command": "-editor.action.defineKeybinding",
-                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-xkIx1o/User/keybindings.json'" },
+                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-041aAc/User/keybindings.json'" },
   { "key": "tab",                   "command": "-editor.action.inlineSuggest.commit",
                                        "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
   { "key": "insert",                "command": "-editor.action.toggleOvertypeInsertMode" },
@@ -1530,8 +1530,6 @@
   { "key": "ctrl+numpad0",          "command": "-workbench.action.zoomReset" },
   { "key": "ctrl+shift+m",          "command": "-workbench.actions.view.problems",
                                        "when": "workbench.panel.markers.view.active" },
-  { "key": "escape",                "command": "-workbench.actions.workbench.panel.output.clearFilterText",
-                                       "when": "outputFilterFocus" },
   { "key": "escape",                "command": "-workbench.banner.focusBanner",
                                        "when": "bannerFocused" },
   { "key": "down",                  "command": "-workbench.banner.focusNextAction",
@@ -2000,9 +1998,9 @@
   { "key": "escape",                "command": "-glass.skipPendingShellTool",
                                        "when": "composerShellToolPendingKeybindingsActive && glassNoModalOpen && isGlassAgentWorkspace && !glassDesignModeInputFocused && !terminalFocusInAny" },
   { "key": "ctrl+d",                "command": "-glass.splitTileHorizontalFromKeyboard",
-                                       "when": "glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !glassEditorPanelVisible && !terminalFocusInAny || glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !terminalFocusInAny && glassActiveTabKind != 'browser'" },
+                                       "when": "glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !glassEditorPanelVisible && !terminalFocusInAny || glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !terminalFocusInAny && glassActiveTabKind != 'browser' && glassActiveTabKind != 'canvas'" },
   { "key": "ctrl+shift+d",          "command": "-glass.splitTileVerticalFromKeyboard",
-                                       "when": "glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !glassEditorPanelVisible && !terminalFocusInAny || glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !terminalFocusInAny && glassActiveTabKind != 'browser'" },
+                                       "when": "glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !glassEditorPanelVisible && !terminalFocusInAny || glassNoModalOpen && isGlassEmptyWorkspace && !editorTextFocus && !terminalFocusInAny && glassActiveTabKind != 'browser' && glassActiveTabKind != 'canvas'" },
   { "key": "alt+enter",             "command": "-glass.stageSelectedChanges",
                                        "when": "isGlassAgentWorkspace && !isGlassSidebarShowMoreFocused && glassActiveDiffScope == 'unstaged' && glassActiveTabKind == 'diff'" },
   { "key": "ctrl+alt+enter",        "command": "-glass.stageSelectedChanges",
@@ -2016,7 +2014,7 @@
   { "key": "shift+alt+d",           "command": "-glass.toggleCursorDevTools",
                                        "when": "glassNoModalOpen && isGlassEmptyWorkspace" },
   { "key": "ctrl+shift+d",          "command": "-glass.toggleDesignMode",
-                                       "when": "glassEditorPanelVisible && isGlassAgentWorkspace && glassActiveTabKind == 'browser'" },
+                                       "when": "glassEditorPanelVisible && isGlassAgentWorkspace && glassActiveTabKind == 'browser' || glassEditorPanelVisible && isGlassAgentWorkspace && glassActiveTabKind == 'canvas'" },
   { "key": "ctrl+shift+i",          "command": "-glass.toggleDevTools",
                                        "when": "glassNoModalOpen && isGlassEmptyWorkspace" },
   { "key": "alt+s",                 "command": "-glass.toggleFileTreeSidebar",
