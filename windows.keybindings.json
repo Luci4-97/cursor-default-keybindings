@@ -1,4 +1,4 @@
-// Default Keybindings of Cursor 3.8.11 for Windows
+// Default Keybindings of Cursor 3.8.24 for Windows
   
 [
   { "key": "escape escape",         "command": "workbench.action.exitZenMode",
@@ -778,7 +778,7 @@
   { "key": "ctrl+alt+pageup",       "command": "editor.action.accessibleViewPreviousCodeBlock",
                                        "when": "accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'inlineChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'panelChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'quickChat'" },
   { "key": "ctrl+m ctrl+k",         "command": "editor.action.defineKeybinding",
-                                       "when": "resource == 'vscode-userdata:/c%3A/Users/RUNNER~1/AppData/Local/Temp/ckb-user-Wnrzwy/User/keybindings.json'" },
+                                       "when": "resource == 'vscode-userdata:/c%3A/Users/RUNNER~1/AppData/Local/Temp/ckb-user-YxQdr2/User/keybindings.json'" },
   { "key": "tab",                   "command": "editor.action.inlineSuggest.commit",
                                        "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
   { "key": "insert",                "command": "editor.action.toggleOvertypeInsertMode" },
@@ -1561,6 +1561,8 @@
   { "key": "ctrl+numpad0",          "command": "workbench.action.zoomReset" },
   { "key": "ctrl+shift+m",          "command": "workbench.actions.view.problems",
                                        "when": "workbench.panel.markers.view.active" },
+  { "key": "escape",                "command": "workbench.actions.workbench.panel.output.clearFilterText",
+                                       "when": "outputFilterFocus" },
   { "key": "escape",                "command": "workbench.banner.focusBanner",
                                        "when": "bannerFocused" },
   { "key": "down",                  "command": "workbench.banner.focusNextAction",

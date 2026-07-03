@@ -1,4 +1,4 @@
-// Default Keybindings of Cursor 3.8.11 for macOS
+// Default Keybindings of Cursor 3.8.24 for macOS
     
 [
     { "key": "escape escape",         "command": "workbench.action.exitZenMode",
@@ -854,7 +854,7 @@
     { "key": "alt+cmd+pageup",        "command": "editor.action.accessibleViewPreviousCodeBlock",
                                          "when": "accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'inlineChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'panelChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'quickChat'" },
     { "key": "cmd+r cmd+k",           "command": "editor.action.defineKeybinding",
-                                         "when": "resource == 'vscode-userdata:/var/folders/bh/cdl3cft92_dbvg852_fp7y7w0000gn/T/ckb-user-HMzegb/User/keybindings.json'" },
+                                         "when": "resource == 'vscode-userdata:/var/folders/bh/cdl3cft92_dbvg852_fp7y7w0000gn/T/ckb-user-InV74V/User/keybindings.json'" },
     { "key": "tab",                   "command": "editor.action.inlineSuggest.commit",
                                          "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
     { "key": "alt+cmd+o",             "command": "editor.action.toggleOvertypeInsertMode" },
@@ -2060,6 +2060,8 @@
                                          "when": "isGlassAgentWorkspace && !glassTilesetPaneFocused" },
     { "key": "ctrl+]",                "command": "glass.nextTab",
                                          "when": "isGlassAgentWorkspace && !glassTilesetPaneFocused" },
+    { "key": "f4",                    "command": "glass.nextWorkspaceSearchResult",
+                                         "when": "glassNoModalOpen && glassWorkspaceSearchVisible && hasSearchResult && isGlassEmptyWorkspace" },
     { "key": "ctrl+\\",               "command": "glass.openActionMenu",
                                          "when": "isGlassAgentWorkspace && glassActiveTabKind == 'diff'" },
     { "key": "shift+alt+\\",          "command": "glass.openActionMenu",
@@ -2136,6 +2138,8 @@
                                          "when": "isGlassAgentWorkspace && !glassTilesetPaneFocused" },
     { "key": "ctrl+[",                "command": "glass.previousTab",
                                          "when": "isGlassAgentWorkspace && !glassTilesetPaneFocused" },
+    { "key": "shift+f4",              "command": "glass.previousWorkspaceSearchResult",
+                                         "when": "glassNoModalOpen && glassWorkspaceSearchVisible && hasSearchResult && isGlassEmptyWorkspace" },
     { "key": "ctrl+enter",            "command": "glass.pushSelectedChanges",
                                          "when": "isGlassAgentWorkspace && !isGlassSidebarShowMoreFocused && glassActiveDiffScope == 'committed' && glassActiveTabKind == 'diff'" },
     { "key": "shift+alt+enter",       "command": "glass.pushSelectedChanges",
@@ -2244,6 +2248,10 @@
                                          "when": "cursorAtEndOfQuickInputBox && inQuickInput && quickInputType == 'quickPick' || inQuickInput && !inputFocus && quickInputType == 'quickPick'" },
     { "key": "right",                 "command": "quickInput.acceptInBackground",
                                          "when": "cursorAtEndOfQuickInputBox && inQuickInput && quickInputType == 'quickPick' || inQuickInput && !inputFocus && quickInputType == 'quickPick'" },
+    { "key": "f4",                    "command": "search.action.focusNextSearchResult",
+                                         "when": "glassWorkspaceSearchVisible && hasSearchResult" },
+    { "key": "shift+f4",              "command": "search.action.focusPreviousSearchResult",
+                                         "when": "glassWorkspaceSearchVisible && hasSearchResult" },
     { "key": "ctrl+-",                "command": "workbench.action.quickInputBack",
                                          "when": "inQuickOpen" },
     { "key": "ctrl+tab",              "command": "workbench.action.quickOpenNavigateNextInAgentsPicker",
