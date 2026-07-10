@@ -1,4 +1,4 @@
-// Default Keybindings of Cursor 3.8.24 for macOS
+// Default Keybindings of Cursor 3.9.16 for macOS
     
 [
     { "key": "escape escape",         "command": "-workbench.action.exitZenMode",
@@ -854,7 +854,7 @@
     { "key": "alt+cmd+pageup",        "command": "-editor.action.accessibleViewPreviousCodeBlock",
                                          "when": "accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'inlineChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'panelChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'quickChat'" },
     { "key": "cmd+r cmd+k",           "command": "-editor.action.defineKeybinding",
-                                         "when": "resource == 'vscode-userdata:/var/folders/bh/cdl3cft92_dbvg852_fp7y7w0000gn/T/ckb-user-InV74V/User/keybindings.json'" },
+                                         "when": "resource == 'vscode-userdata:/var/folders/8j/sfr9qqcj73j4p6nhwcfpr0th0000gn/T/ckb-user-gaYUag/User/keybindings.json'" },
     { "key": "tab",                   "command": "-editor.action.inlineSuggest.commit",
                                          "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
     { "key": "alt+cmd+o",             "command": "-editor.action.toggleOvertypeInsertMode" },
@@ -1249,8 +1249,6 @@
                                          "when": "folderMatchFocus && isEditableItem && replaceActive && searchViewletVisible" },
     { "key": "shift+alt+f",           "command": "-search.action.restrictSearchToFolder",
                                          "when": "folderMatchWithResourceFocus && searchViewletVisible" },
-    { "key": "cmd+i",                 "command": "-search.action.searchWithAI",
-                                         "when": "hasAIResultProviderKey && searchViewletFocus" },
     { "key": "cmd+down",              "command": "-search.focus.nextInputBox",
                                          "when": "inSearchEditor && inputBoxFocus || inputBoxFocus && searchViewletVisible" },
     { "key": "cmd+up",                "command": "-search.focus.previousInputBox",
