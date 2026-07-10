@@ -1,4 +1,4 @@
-// Default Keybindings of Cursor 3.10.17 for macOS
+// Default Keybindings of Cursor 3.10.20 for macOS
     
 [
     { "key": "escape escape",         "command": "workbench.action.exitZenMode",
@@ -824,7 +824,7 @@
     { "key": "alt+cmd+pageup",        "command": "editor.action.accessibleViewPreviousCodeBlock",
                                          "when": "accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'inlineChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'panelChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'quickChat'" },
     { "key": "cmd+r cmd+k",           "command": "editor.action.defineKeybinding",
-                                         "when": "resource == 'vscode-userdata:/var/folders/k8/j7r3p6cx43xdqhzy2rmp6tqr0000gn/T/ckb-user-gWeY49/User/keybindings.json'" },
+                                         "when": "resource == 'vscode-userdata:/var/folders/8j/sfr9qqcj73j4p6nhwcfpr0th0000gn/T/ckb-user-k4KRcU/User/keybindings.json'" },
     { "key": "tab",                   "command": "editor.action.inlineSuggest.commit",
                                          "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
     { "key": "alt+cmd+o",             "command": "editor.action.toggleOvertypeInsertMode" },
@@ -2280,6 +2280,8 @@
                                          "when": "glassNoModalOpen && isGlassEmptyWorkspace && isSettingsPaneOpen && !inputFocus" },
     { "key": "cmd+w",                 "command": "glass.closeGlassSettings",
                                          "when": "glassNoModalOpen && isGlassEmptyWorkspace && isSettingsPaneOpen" },
+    { "key": "shift+cmd+s",           "command": "glass.createSideChat",
+                                         "when": "glassNoModalOpen && glassSideChatsEnabled && isGlassEmptyWorkspace && !glassProjectAgentActive && !terminalFocusInAny" },
     { "key": "cmd+l",                 "command": "glass.focusBrowserLocationBar",
                                          "when": "isGlassAgentWorkspace && !browserViewFocused && !editorTextFocus && !glassDesignModeInputFocused && glassActiveTabKind == 'browser'" },
     { "key": "shift+cmd+r",           "command": "glass.hardReloadBrowserTab",
