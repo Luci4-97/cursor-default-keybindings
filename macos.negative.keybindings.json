@@ -1886,6 +1886,8 @@
                                          "when": "glassNoModalOpen && isGlassEmptyWorkspace" },
     { "key": "alt+cmd+n",             "command": "-glass.newAgentKeepPaneFromKeyboard",
                                          "when": "glassNoModalOpen && isGlassEmptyWorkspace" },
+    { "key": "shift+cmd+s",           "command": "-glass.newProjectSubagent",
+                                         "when": "glassProjectAgentActive && glassPromptInputFocused && isGlassAgentWorkspace" },
     { "key": "ctrl+shift+`",          "command": "-glass.newTerminal",
                                          "when": "isGlassAgentWorkspace" },
     { "key": "alt+cmd+down",          "command": "-glass.nextAgent",
