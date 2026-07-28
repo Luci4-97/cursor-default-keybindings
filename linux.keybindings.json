@@ -1,4 +1,4 @@
-// Default Keybindings of Cursor 3.10.17 for Linux
+// Default Keybindings of Cursor 3.10.20 for Linux
   
 [
   { "key": "escape escape",         "command": "workbench.action.exitZenMode",
@@ -751,7 +751,7 @@
   { "key": "ctrl+alt+pageup",       "command": "editor.action.accessibleViewPreviousCodeBlock",
                                        "when": "accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'inlineChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'panelChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'quickChat'" },
   { "key": "ctrl+m ctrl+k",         "command": "editor.action.defineKeybinding",
-                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-re4n2J/User/keybindings.json'" },
+                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-e5RRhH/User/keybindings.json'" },
   { "key": "tab",                   "command": "editor.action.inlineSuggest.commit",
                                        "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
   { "key": "insert",                "command": "editor.action.toggleOvertypeInsertMode" },
@@ -2095,6 +2095,8 @@
                                        "when": "glassNoModalOpen && isGlassEmptyWorkspace && isSettingsPaneOpen && !inputFocus" },
   { "key": "ctrl+w",                "command": "glass.closeGlassSettings",
                                        "when": "glassNoModalOpen && isGlassEmptyWorkspace && isSettingsPaneOpen" },
+  { "key": "ctrl+shift+s",          "command": "glass.createSideChat",
+                                       "when": "glassNoModalOpen && glassSideChatsEnabled && isGlassEmptyWorkspace && !glassProjectAgentActive && !terminalFocusInAny" },
   { "key": "ctrl+l",                "command": "glass.focusBrowserLocationBar",
                                        "when": "isGlassAgentWorkspace && !browserViewFocused && !editorTextFocus && !glassDesignModeInputFocused && glassActiveTabKind == 'browser'" },
   { "key": "ctrl+shift+r",          "command": "glass.hardReloadBrowserTab",
