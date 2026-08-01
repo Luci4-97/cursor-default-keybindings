@@ -1,4 +1,4 @@
-// Default Keybindings of Cursor 3.13.10 for Linux
+// Default Keybindings of Cursor 3.13.25 for Linux
   
 [
   { "key": "escape escape",         "command": "workbench.action.exitZenMode",
@@ -719,7 +719,7 @@
   { "key": "ctrl+alt+pageup",       "command": "editor.action.accessibleViewPreviousCodeBlock",
                                        "when": "accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'inlineChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'panelChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'quickChat'" },
   { "key": "ctrl+m ctrl+k",         "command": "editor.action.defineKeybinding",
-                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-CNkY59/User/keybindings.json'" },
+                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-fgLPiD/User/keybindings.json'" },
   { "key": "tab",                   "command": "editor.action.inlineSuggest.commit",
                                        "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
   { "key": "insert",                "command": "editor.action.toggleOvertypeInsertMode" },
@@ -1717,8 +1717,6 @@
                                        "when": "glassNoModalOpen && isGlassEmptyWorkspace" },
   { "key": "ctrl+alt+n",            "command": "glass.newAgentKeepPaneFromKeyboard",
                                        "when": "glassNoModalOpen && isGlassEmptyWorkspace" },
-  { "key": "ctrl+shift+s",          "command": "glass.newProjectSubagent",
-                                       "when": "glassProjectAgentActive && glassPromptInputFocused && isGlassAgentWorkspace" },
   { "key": "ctrl+shift+`",          "command": "glass.newTerminal",
                                        "when": "isGlassAgentWorkspace" },
   { "key": "ctrl+alt+down",         "command": "glass.nextAgent",
