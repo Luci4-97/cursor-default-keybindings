@@ -1,4 +1,4 @@
-// Default Keybindings of Cursor 3.25.9 for Linux
+// Default Keybindings of Cursor 3.26.16 for Linux
   
 [
   { "key": "escape escape",         "command": "workbench.action.exitZenMode",
@@ -627,7 +627,7 @@
   { "key": "alt+[",                 "command": "editor.action.accessibleViewPrevious",
                                        "when": "accessibleViewIsShown && accessibleViewSupportsNavigation" },
   { "key": "ctrl+m ctrl+k",         "command": "editor.action.defineKeybinding",
-                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-LKFaha/User/keybindings.json'" },
+                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-F5Aqp9/User/keybindings.json'" },
   { "key": "tab",                   "command": "editor.action.inlineSuggest.commit",
                                        "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
   { "key": "insert",                "command": "editor.action.toggleOvertypeInsertMode" },
@@ -653,6 +653,12 @@
                                        "when": "explorerResourceIsFolder && filesExplorerFocus && foldersViewVisible && !inputFocus" },
   { "key": "ctrl+m",                "command": "glass.holdToTalk",
                                        "when": "glassNoModalOpen && isGlassEmptyWorkspace" },
+  { "key": "ctrl+shift+z",          "command": "glass.windowRedo",
+                                       "when": "glassNoModalOpen && isGlassEmptyWorkspace && !browserViewFocused && !editorFocus && !glassPromptInputFocused && !inputFocus && !terminalFocusInAny && !textInputFocus" },
+  { "key": "ctrl+y",                "command": "glass.windowRedo",
+                                       "when": "glassNoModalOpen && isGlassEmptyWorkspace && !browserViewFocused && !editorFocus && !glassPromptInputFocused && !inputFocus && !terminalFocusInAny && !textInputFocus" },
+  { "key": "ctrl+z",                "command": "glass.windowUndo",
+                                       "when": "glassNoModalOpen && isGlassEmptyWorkspace && !browserViewFocused && !editorFocus && !glassPromptInputFocused && !inputFocus && !terminalFocusInAny && !textInputFocus" },
   { "key": "alt+down",              "command": "history.showNext",
                                        "when": "historyNavigationForwardsEnabled && historyNavigationWidgetFocus && !isComposing && !suggestWidgetVisible" },
   { "key": "down",                  "command": "history.showNext",
@@ -1777,7 +1783,7 @@
   { "key": "ctrl+a",                "command": "glass.diffSelectAll",
                                        "when": "glassEditorPanelVisible && isGlassAgentWorkspace && !editorFocus && !glassPromptInputFocused && !inputFocus && !textInputFocus && glassActiveTabKind == 'agentChanges' || glassEditorPanelVisible && isGlassAgentWorkspace && !editorFocus && !glassPromptInputFocused && !inputFocus && !textInputFocus && glassActiveTabKind == 'diff' || glassEditorPanelVisible && isGlassAgentWorkspace && !editorFocus && !glassPromptInputFocused && !inputFocus && !textInputFocus && glassActiveTabKind == 'pr'" },
   { "key": "ctrl+a",                "command": "glass.fileEditorSelectAll",
-                                       "when": "glassEditorPanelVisible && isGlassAgentWorkspace && !editorFocus && !glassPromptInputFocused && !inputFocus && !textInputFocus && glassActiveTabKind == 'file'" },
+                                       "when": "glassEditorPanelVisible && isGlassAgentWorkspace && !editorFocus && !glassFileTreeFocused && !glassPromptInputFocused && !inputFocus && !textInputFocus && glassActiveTabKind == 'file'" },
   { "key": "escape",                "command": "glass.hideBrowserFind",
                                        "when": "browserFindWidgetVisible && isGlassAgentWorkspace && glassActiveTabKind == 'browser'" },
   { "key": "escape",                "command": "glass.hideFileGoToLine",
@@ -2018,8 +2024,6 @@
                                        "when": "isGlassAgentWorkspace && glassActiveTabKind == 'file' || isGlassAgentWorkspace && glassActiveTabKind == 'terminal' || glassDiffLineSelectionActive && isGlassAgentWorkspace && glassActiveTabKind == 'diff' || glassDiffLineSelectionActive && isGlassAgentWorkspace && glassActiveTabKind == 'pr'" },
   { "key": "ctrl+shift+l",          "command": "glass.newAgentWithContext",
                                        "when": "isGlassAgentWorkspace && glassActiveTabKind == 'file' || isGlassAgentWorkspace && glassActiveTabKind == 'terminal' || glassDiffLineSelectionActive && isGlassAgentWorkspace && glassActiveTabKind == 'diff' || glassDiffLineSelectionActive && isGlassAgentWorkspace && glassActiveTabKind == 'pr'" },
-  { "key": "ctrl+shift+m",          "command": "glass.toggleTileFullscreen",
-                                       "when": "glassEditorPanelFullscreenAvailable && isGlassAgentWorkspace && !glassEditorPanelFullscreen && glassTilesetsMode == 'tiled'" },
   { "key": "escape",                "command": "aipopup.action.closePromptBar",
                                        "when": "editorHasPromptBar && editorPromptBarFocused && editorTextFocus" },
   { "key": "escape",                "command": "diffEditor.exitCompareMove",
