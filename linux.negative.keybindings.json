@@ -1,4 +1,4 @@
-// Default Keybindings of Cursor 3.18.9 for Linux
+// Default Keybindings of Cursor 3.19.7 for Linux
   
 [
   { "key": "escape escape",         "command": "-workbench.action.exitZenMode",
@@ -669,7 +669,7 @@
   { "key": "alt+[",                 "command": "-editor.action.accessibleViewPrevious",
                                        "when": "accessibleViewIsShown && accessibleViewSupportsNavigation" },
   { "key": "ctrl+m ctrl+k",         "command": "-editor.action.defineKeybinding",
-                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-wQ4rOf/User/keybindings.json'" },
+                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-ucqlMq/User/keybindings.json'" },
   { "key": "tab",                   "command": "-editor.action.inlineSuggest.commit",
                                        "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
   { "key": "insert",                "command": "-editor.action.toggleOvertypeInsertMode" },
@@ -1353,6 +1353,8 @@
                                        "when": "glassNoModalOpen && isGlassEmptyWorkspace && !glassEditorPanelVisible && !glassTilesetRemovableTileFocused" },
   { "key": "ctrl+shift+w",          "command": "-glass.closeWindow",
                                        "when": "glassNoModalOpen && isGlassEmptyWorkspace" },
+  { "key": "shift+alt+;",           "command": "-glass.collapseOrExpandAllDiffFiles",
+                                       "when": "isGlassAgentWorkspace && glassActiveTabKind == 'agentChanges' || isGlassAgentWorkspace && glassActiveTabKind == 'diff' || isGlassAgentWorkspace && glassActiveTabKind == 'pr'" },
   { "key": "alt+enter",             "command": "-glass.commitAndPushSelectedChanges",
                                        "when": "isGlassAgentWorkspace && !isGlassSidebarShowMoreFocused && glassActiveDiffScope == 'staged' && glassActiveTabKind == 'diff'" },
   { "key": "ctrl+alt+enter",        "command": "-glass.commitAndPushSelectedChanges",
