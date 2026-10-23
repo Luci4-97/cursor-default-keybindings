@@ -1,4 +1,4 @@
-// Default Keybindings of Cursor 3.21.13 for macOS
+// Default Keybindings of Cursor 3.21.16 for macOS
     
 [
     { "key": "escape escape",         "command": "-workbench.action.exitZenMode",
@@ -704,7 +704,7 @@
     { "key": "alt+[",                 "command": "-editor.action.accessibleViewPrevious",
                                          "when": "accessibleViewIsShown && accessibleViewSupportsNavigation" },
     { "key": "cmd+r cmd+k",           "command": "-editor.action.defineKeybinding",
-                                         "when": "resource == 'vscode-userdata:/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T/ckb-user-u4fUAB/User/keybindings.json'" },
+                                         "when": "resource == 'vscode-userdata:/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T/ckb-user-9KMqtr/User/keybindings.json'" },
     { "key": "tab",                   "command": "-editor.action.inlineSuggest.commit",
                                          "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
     { "key": "alt+cmd+o",             "command": "-editor.action.toggleOvertypeInsertMode" },
