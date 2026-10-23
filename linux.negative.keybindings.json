@@ -1,4 +1,4 @@
-// Default Keybindings of Cursor 3.19.13 for Linux
+// Default Keybindings of Cursor 3.19.19 for Linux
   
 [
   { "key": "escape escape",         "command": "-workbench.action.exitZenMode",
@@ -669,7 +669,7 @@
   { "key": "alt+[",                 "command": "-editor.action.accessibleViewPrevious",
                                        "when": "accessibleViewIsShown && accessibleViewSupportsNavigation" },
   { "key": "ctrl+m ctrl+k",         "command": "-editor.action.defineKeybinding",
-                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-qQhE01/User/keybindings.json'" },
+                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-FFP70G/User/keybindings.json'" },
   { "key": "tab",                   "command": "-editor.action.inlineSuggest.commit",
                                        "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
   { "key": "insert",                "command": "-editor.action.toggleOvertypeInsertMode" },
