@@ -1,4 +1,4 @@
-// Default Keybindings of Cursor 3.16.17 for Linux
+// Default Keybindings of Cursor 3.17.8 for Linux
   
 [
   { "key": "escape escape",         "command": "workbench.action.exitZenMode",
@@ -691,7 +691,7 @@
   { "key": "ctrl+alt+pageup",       "command": "editor.action.accessibleViewPreviousCodeBlock",
                                        "when": "accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'inlineChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'panelChat' || accessibleViewContainsCodeBlocks && accessibleViewCurrentProviderId == 'quickChat'" },
   { "key": "ctrl+m ctrl+k",         "command": "editor.action.defineKeybinding",
-                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-PT1aYu/User/keybindings.json'" },
+                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-SOKmHj/User/keybindings.json'" },
   { "key": "tab",                   "command": "editor.action.inlineSuggest.commit",
                                        "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
   { "key": "insert",                "command": "editor.action.toggleOvertypeInsertMode" },
@@ -1748,6 +1748,8 @@
                                        "when": "isGlassAgentWorkspace && glassActiveTabKind == 'diff' || isGlassAgentWorkspace && glassActiveTabKind == 'pr'" },
   { "key": "ctrl+shift+r",          "command": "glass.reloadWindow",
                                        "when": "glassNoModalOpen && isGlassEmptyWorkspace" },
+  { "key": "ctrl+shift+alt+s",      "command": "glass.saveAllFiles",
+                                       "when": "isGlassAgentWorkspace" },
   { "key": "ctrl+s",                "command": "glass.saveFile",
                                        "when": "isGlassAgentWorkspace" },
   { "key": "ctrl+shift+j",          "command": "glass.scrollAgentPanelDown",
@@ -1833,7 +1835,7 @@
   { "key": "alt+c",                 "command": "toggleSearchCaseSensitive",
                                        "when": "glassWorkspaceSearchInputFocused && glassWorkspaceSearchVisible && !glassEditorFindWidgetFocused || glassWorkspaceSearchVisible && !glassEditorFindWidgetFocused && !glassFindInputFocused" },
   { "key": "alt+p",                 "command": "toggleSearchPreserveCase",
-                                       "when": "glassWorkspaceSearchInputFocused && glassWorkspaceSearchVisible && !glassEditorFindWidgetFocused || glassWorkspaceSearchVisible && !glassEditorFindWidgetFocused && !glassFindInputFocused" },
+                                       "when": "glassWorkspaceSearchInputFocused && glassWorkspaceSearchVisible && !glassEditorFindWidgetFocused" },
   { "key": "alt+r",                 "command": "toggleSearchRegex",
                                        "when": "glassWorkspaceSearchInputFocused && glassWorkspaceSearchVisible && !glassEditorFindWidgetFocused || glassWorkspaceSearchVisible && !glassEditorFindWidgetFocused && !glassFindInputFocused" },
   { "key": "alt+w",                 "command": "toggleSearchWholeWord",
@@ -1860,8 +1862,7 @@
                                        "when": "isDevelopment" },
   { "key": "ctrl+shift+f",          "command": "workbench.action.terminal.searchWorkspace",
                                        "when": "terminalFocus && terminalProcessSupported && terminalTextSelected" },
-  { "key": "ctrl+shift+i",          "command": "workbench.action.toggleDevTools",
-                                       "when": "isDevelopment" },
+  { "key": "ctrl+shift+i",          "command": "workbench.action.toggleDevTools" },
   { "key": "alt+left",              "command": "glass.agentNavigateBack",
                                        "when": "isGlassAgentWorkspace && !glassEditorPanelFocused && !terminalFocusInAny || isGlassAgentWorkspace && !terminalFocusInAny && glassActiveTabKind != 'file'" },
   { "key": "alt+left",              "command": "glass.agentNavigateBack",
