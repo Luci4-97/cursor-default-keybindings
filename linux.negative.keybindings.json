@@ -1,4 +1,4 @@
-// Default Keybindings of Cursor 3.23.23 for Linux
+// Default Keybindings of Cursor 3.24.9 for Linux
   
 [
   { "key": "escape escape",         "command": "-workbench.action.exitZenMode",
@@ -627,7 +627,7 @@
   { "key": "alt+[",                 "command": "-editor.action.accessibleViewPrevious",
                                        "when": "accessibleViewIsShown && accessibleViewSupportsNavigation" },
   { "key": "ctrl+m ctrl+k",         "command": "-editor.action.defineKeybinding",
-                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-j53gbR/User/keybindings.json'" },
+                                       "when": "resource == 'vscode-userdata:/tmp/ckb-user-1haH6H/User/keybindings.json'" },
   { "key": "tab",                   "command": "-editor.action.inlineSuggest.commit",
                                        "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
   { "key": "insert",                "command": "-editor.action.toggleOvertypeInsertMode" },
@@ -1753,7 +1753,7 @@
                                        "when": "isGlassAgentWorkspace && !browserViewFocused && !editorTextFocus && !glassDesignModeInputFocused && glassActiveTabKind == 'browser'" },
   { "key": "ctrl+shift+r",          "command": "-glass.hardReloadBrowserTab",
                                        "when": "browserViewFocused && isGlassAgentWorkspace && glassActiveTabKind == 'browser'" },
-  { "key": "ctrl+shift+s",          "command": "-glass.newProjectThreadFromFork",
+  { "key": "ctrl+shift+s",          "command": "-glass.ignoreSaveAsChordInProject",
                                        "when": "glassProjectAgentActive && glassSideChatsEnabled && isGlassAgentWorkspace && !terminalFocusInAny" },
   { "key": "ctrl+t",                "command": "-glass.newTab",
                                        "when": "glassNoModalOpen && isGlassEmptyWorkspace" },
@@ -1963,7 +1963,7 @@
   { "key": "ctrl+t",                "command": "-glass.newProjectSubagent",
                                        "when": "glassProjectSubagentCreationAvailable && isGlassAgentWorkspace && !glassEditorPanelFocused && !terminalFocusInAny" },
   { "key": "ctrl+shift+t",          "command": "-glass.reopenLastClosedProjectConversationTab",
-                                       "when": "glassProjectAgentActive && glassProjectConversationTabReopenAvailable && isGlassAgentWorkspace && !glassEditorPanelFocused && !terminalFocusInAny" },
+                                       "when": "glassProjectConversationTabReopenAvailable && isGlassAgentWorkspace && !glassEditorPanelFocused && !terminalFocusInAny" },
   { "key": "ctrl+i",                "command": "-glass.focusInput",
                                        "when": "glassNoModalOpen && isGlassEmptyWorkspace && !glassMarkdownFormattingSelection" },
   { "key": "ctrl+.",                "command": "-acceptSelectedCodeAction",
